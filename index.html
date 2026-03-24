@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado pela sua compra! — Bookie Brasil</title>
+  <meta name="description" content="Sua compra foi confirmada. Bem-vindo à Bookie Brasil." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --clr-bg:          #000000;
+      --clr-white:       #ffffff;
+      --clr-gray-100:    #f0f0f0;
+      --clr-gray-300:    #a0a0a0;
+      --clr-gray-500:    #505050;
+      --clr-blue:        #4169E1;
+      --clr-blue-bright: #5a80f5;
+      --clr-blue-deep:   #2a4dc7;
+      --clr-blue-glow:   rgba(65,105,225,0.50);
+      --clr-blue-subtle: rgba(65,105,225,0.10);
+
+      --glass-bg:        rgba(255,255,255,0.07);
+      --glass-bg-mid:    rgba(255,255,255,0.05);
+      --glass-border:    rgba(255,255,255,0.10);
+      --glass-blur:      32px;
+      --glass-blur-lg:   44px;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --sp-xs:  0.4rem;
+      --sp-sm:  0.75rem;
+      --sp-md:  1.25rem;
+      --sp-lg:  2rem;
+      --sp-xl:  3.5rem;
+
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --radius-xl: 40px;
+
+      --header-h: 68px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
+
+    body {
+      background-color: var(--clr-bg);
+      color: var(--clr-white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── FUNDO ANIMADO ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% -10%,  rgba(65,105,225,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 10% 90%,   rgba(65,105,225,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 90% 80%,   rgba(90,128,245,0.08) 0%, transparent 50%);
+      animation: bgPulse 16s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    /* Textura de ruído */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+    }
+
+    @keyframes bgPulse {
+      0%   { transform: scale(1) translate(0, 0); }
+      50%  { transform: scale(1.04) translate(1%, 1.5%); }
+      100% { transform: scale(0.97) translate(-1%, 0.5%); }
+    }
+
+    /* ── UTILITÁRIOS ── */
+    .container {
+      position: relative; z-index: 1;
+      width: min(100%, 1400px);
+      margin-inline: auto;
+      padding-inline: var(--sp-md);
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; height: var(--header-h);
+      backdrop-filter: blur(var(--glass-blur-lg)) saturate(180%);
+      -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(180%);
+      background: rgba(0,0,0,0.55);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-wrap {
+      display: flex; align-items: center;
+      flex-shrink: 0; z-index: 2;
+    }
+
+    .logo-wrap svg {
+      height: 26px;
+      width: auto;
+      display: block;
+    }
+
+    .header-title {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      white-space: nowrap; pointer-events: none; z-index: 1;
+      font-family: var(--font-display);
+      font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--clr-gray-300);
+      display: none;
+    }
+
+    @media (min-width: 640px) { .header-title { display: block; } }
+
+    .header-link {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 1.1rem; border-radius: 50px;
+      font-family: var(--font-display);
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--clr-gray-300);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      transition: color 0.2s, border-color 0.2s, transform 0.15s;
+      flex-shrink: 0; z-index: 2;
+    }
+
+    .header-link:hover {
+      color: var(--clr-white);
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-1px);
+    }
+
+    /* ── CONTEÚDO PRINCIPAL ── */
+    main {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: calc(var(--header-h) + var(--sp-xl)) var(--sp-md) var(--sp-xl);
+    }
+
+    /* ── ANEL DE CONFIRMAÇÃO ANIMADO ── */
+    .confirm-ring {
+      position: relative;
+      width: 96px; height: 96px;
+      margin-bottom: var(--sp-lg);
+      flex-shrink: 0;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    /* Círculo giratório externo */
+    .confirm-ring__orbit {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      border-top-color: var(--clr-blue-bright);
+      border-right-color: rgba(65,105,225,0.3);
+      animation: spin 3s linear infinite;
+    }
+
+    /* Segundo anel em sentido oposto */
+    .confirm-ring__orbit2 {
+      position: absolute; inset: 8px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-bottom-color: rgba(90,128,245,0.5);
+      border-left-color: rgba(65,105,225,0.2);
+      animation: spinRev 5s linear infinite;
+    }
+
+    /* Disco central glass */
+    .confirm-ring__core {
+      position: absolute; inset: 14px;
+      border-radius: 50%;
+      background: rgba(65,105,225,0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(65,105,225,0.35);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        0 0 30px rgba(65,105,225,0.35),
+        0 0 60px rgba(65,105,225,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+      animation: corePulse 3s ease-in-out infinite;
+    }
+
+    .confirm-ring__check {
+      width: 28px; height: 28px;
+      stroke: var(--clr-white); fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawCheck 0.6s 0.5s ease forwards;
+    }
+
+    @keyframes spin    { to { transform: rotate(360deg); } }
+    @keyframes spinRev { to { transform: rotate(-360deg); } }
+    @keyframes corePulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(65,105,225,0.35), 0 0 60px rgba(65,105,225,0.10), inset 0 1px 0 rgba(255,255,255,0.15); }
+      50%       { box-shadow: 0 0 44px rgba(65,105,225,0.55), 0 0 80px rgba(65,105,225,0.18), inset 0 1px 0 rgba(255,255,255,0.20); }
+    }
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* ── BLOCO DE TEXTO CENTRAL ── */
+    .hero-block {
+      text-align: center;
+      max-width: 620px;
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      font-size: 0.72rem; font-weight: 500;
+      color: var(--clr-blue-bright);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: var(--sp-md);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--clr-blue-bright);
+      box-shadow: 0 0 8px var(--clr-blue-bright);
+      animation: dotPulse 2s ease infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    .main-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.06; letter-spacing: -0.025em;
+      margin-bottom: var(--sp-md);
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    .main-title em {
+      font-style: normal;
+      background: linear-gradient(125deg, var(--clr-blue-bright) 0%, #a0b8ff 45%, var(--clr-blue) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .main-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 300; color: var(--clr-gray-300);
+      line-height: 1.75;
+      margin-bottom: var(--sp-xl);
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .main-sub strong { font-weight: 500; color: var(--clr-gray-100); }
+
+    /* ── CARD DE STATUS ── */
+    .status-card {
+      width: min(100%, 560px);
+      margin-inline: auto;
+      margin-bottom: var(--sp-xl);
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      box-shadow:
+        0 12px 48px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      animation: fadeUp 0.7s 0.25s ease both;
+      position: relative;
+    }
+
+    /* Brilho no topo do card */
+    .status-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20%; right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(65,105,225,0.8), transparent);
+    }
+
+    .status-card__item {
+      display: flex; align-items: center;
+      gap: var(--sp-md);
+      padding: var(--sp-md) var(--sp-lg);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.2s;
+    }
+
+    .status-card__item:last-child { border-bottom: none; }
+    .status-card__item:hover { background: rgba(255,255,255,0.03); }
+
+    .status-card__icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(65,105,225,0.14);
+      border: 1px solid rgba(65,105,225,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      box-shadow: 0 0 16px rgba(65,105,225,0.15);
+    }
+
+    .status-card__body { flex: 1; }
+
+    .status-card__label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--clr-blue-bright);
+      margin-bottom: 0.15rem;
+    }
+
+    .status-card__value {
+      font-size: 0.9rem; font-weight: 400;
+      color: var(--clr-gray-100); line-height: 1.4;
+    }
+
+    .status-card__badge {
+      padding: 0.2rem 0.65rem;
+      border-radius: 50px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .badge--green {
+      background: rgba(34,197,94,0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+
+    .badge--blue {
+      background: rgba(65,105,225,0.15);
+      color: var(--clr-blue-bright);
+      border: 1px solid rgba(65,105,225,0.25);
+    }
+
+    /* ── AÇÕES ── */
+    .actions {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: var(--sp-md);
+      animation: fadeUp 0.7s 0.3s ease both;
+      margin-bottom: var(--sp-xl);
+    }
+
+    .btn-primary {
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-blue-deep) 100%);
+      color: var(--clr-white);
+      font-family: var(--font-display);
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.04em;
+      border: none; cursor: pointer;
+      transition: box-shadow 0.3s, transform 0.2s;
+      box-shadow: 0 4px 24px rgba(65,105,225,0.40);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 36px rgba(65,105,225,0.60);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      background: transparent;
+      color: var(--clr-gray-300);
+      font-family: var(--font-display);
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      transition: color 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--clr-white);
+      border-color: rgba(255,255,255,0.28);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── RODAPÉ DE CONFIANÇA ── */
+    .trust-row {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+      gap: var(--sp-lg);
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .trust-item {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--clr-gray-500);
+    }
+
+    .trust-item::before {
+      content: attr(data-icon);
+      font-size: 0.9rem;
+    }
+
+    .trust-divider {
+      width: 1px; height: 14px;
+      background: var(--clr-gray-500);
+      opacity: 0.3;
+    }
+
+    @media (max-width: 480px) {
+      .trust-divider { display: none; }
+      .actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+
+    /* ── PARTÍCULAS FLUTUANTES ── */
+    .particles {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--clr-blue-bright);
+      opacity: 0;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* ── CONFETTI BURST no load ── */
+    .confetti-wrap {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+
+    .conf {
+      position: absolute;
+      width: 7px; height: 7px;
+      opacity: 0;
+      animation: confFall linear forwards;
+      border-radius: 1px;
+    }
+
+    @keyframes confFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: var(--sp-lg) 0;
+    }
+
+    .footer__inner {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between; gap: var(--sp-md);
+    }
+
+    .footer__copy { font-size: 0.78rem; color: var(--clr-gray-500); font-weight: 300; }
+
+    .footer__links { display: flex; flex-wrap: wrap; gap: var(--sp-md); }
+
+    .footer__links a {
+      font-size: 0.78rem; color: var(--clr-gray-500);
+      font-weight: 300; transition: color 0.2s;
+    }
+
+    .footer__links a:hover { color: var(--clr-blue-bright); }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: var(--clr-blue-deep); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- Partículas de fundo -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+  <!-- Confetti burst inicial -->
+  <div class="confetti-wrap" id="confetti" aria-hidden="true"></div>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <span class="logo-wrap" aria-label="Bookie Brasil">
+        <!-- Logo SVG inline para máxima nitidez e sem dependência de arquivo -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 594.938 70.5" aria-hidden="true" focusable="false">
+          <path fill="#ffffff" fill-rule="evenodd" d="M222.5,526.941h66.089q31.659,0,31.658-20.175v-1.32a16.645,16.645,0,0,0-1.747-7.731,13.957,13.957,0,0,0-4.625-5.326,34.307,34.307,0,0,0-5.242-2.969,27.015,27.015,0,0,0-4.831-1.6,19.842,19.842,0,0,0,3.494-1.32,27.167,27.167,0,0,0,3.907-2.405,11.046,11.046,0,0,0,3.443-4.148,12.874,12.874,0,0,0,1.285-5.8v-1.32q0-7.071-6.372-11.549T287.973,456.8H222.5v70.142Zm23.949-55.34h37.414q8.323,0,8.326,5.562v0.189q0,5.655-8.326,5.656H246.449V471.6Zm39.469,26.3q9.457,0,9.457,6.507v0.377a6.626,6.626,0,0,1-2.056,4.808q-2.055,2.073-7.4,2.074H246.449V497.9h39.469Zm264.594-40.774H374.866a86.518,86.518,0,0,0-19.789,2.037,46.175,46.175,0,0,0-13.834,5.313,29.829,29.829,0,0,0-8.5,7.846,28.846,28.846,0,0,0-4.527,9.018,34.755,34.755,0,0,0-1.241,9.388v2.225a35.423,35.423,0,0,0,1.241,9.45,29.408,29.408,0,0,0,4.59,9.2,30.709,30.709,0,0,0,8.56,8.033,47.134,47.134,0,0,0,13.834,5.5,81.655,81.655,0,0,0,19.789,2.161H550.512q47.766,0,47.766-34.343v-2.225Q598.278,457.13,550.512,457.129Zm22.8,35.074q0,6.321-5.789,10.87-5.313,4.175-17.028,4.517c-0.695.021-172.615,0.03-173.344,0.03q-13.375,0-19.165-4.547t-5.788-10.87v-0.557q0-6.543,5.724-10.816t19.229-4.271h0.129c0.59,0,172.377.007,172.945,0.02q11.9,0.27,17.3,4.306,5.792,4.327,5.788,10.76V492.2h0ZM439.139,505.016h28.226L486.114,479.2H457.889ZM666.513,527h28.4l-41.849-37.579,39.98-31.624H665.393L638.012,479.98H629.8V457.8H608.038V527H629.8V500.81h7.262Zm57.862-69.878H700.538v69.817h23.837V457.122Zm11.463-.323v70.143h81.61v-16.31h-57.97v-11.5h55.606V483.1H759.478v-10.37H816.42V456.8H735.838Z" transform="translate(-222.5 -456.812)"/>
+        </svg>
+      </span>
+
+      <span class="header-title" aria-hidden="true">Confirmação de Compra</span>
+
+      <!-- espaço reservado para manter o logo centralizado -->
+      <div style="width:90px;" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <!-- ── CONTEÚDO PRINCIPAL ── -->
+  <main>
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+
+      <!-- Anel animado de confirmação -->
+      <div class="confirm-ring" role="img" aria-label="Compra confirmada">
+        <div class="confirm-ring__orbit"></div>
+        <div class="confirm-ring__orbit2"></div>
+        <div class="confirm-ring__core">
+          <svg class="confirm-ring__check" viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Bloco de texto -->
+      <div class="hero-block">
+        <div class="eyebrow">Compra Confirmada</div>
+
+        <h1 class="main-title">
+          Obrigado pela<br/>
+          <em>sua confiança!</em>
+        </h1>
+
+        <p class="main-sub">
+          Seu pedido foi processado com sucesso.
+          Em instantes você receberá um <strong>e-mail de confirmação</strong> com
+          as instruções de acesso ao seu conteúdo.
+          Bem-vindo à Bookie — que essa leitura transforme o seu caminho.
+        </p>
+      </div>
+
+      <!-- Card de status -->
+      <div class="status-card" role="region" aria-label="Status do pedido">
+
+        <div class="status-card__item">
+          <div class="status-card__icon" aria-hidden="true">✅</div>
+          <div class="status-card__body">
+            <p class="status-card__label">Status do Pagamento</p>
+            <p class="status-card__value">Pagamento aprovado e confirmado</p>
+          </div>
+          <span class="status-card__badge badge--green">Aprovado</span>
+        </div>
+
+        <div class="status-card__item">
+          <div class="status-card__icon" aria-hidden="true">📩</div>
+          <div class="status-card__body">
+            <p class="status-card__label">E-mail de Acesso</p>
+            <p class="status-card__value">Enviado para o endereço cadastrado</p>
+          </div>
+          <span class="status-card__badge badge--blue">Enviado</span>
+        </div>
+
+        <div class="status-card__item">
+          <div class="status-card__icon" aria-hidden="true">⚡</div>
+          <div class="status-card__body">
+            <p class="status-card__label">Acesso ao Conteúdo</p>
+            <p class="status-card__value">Disponível imediatamente após confirmação</p>
+          </div>
+          <span class="status-card__badge badge--blue">Imediato</span>
+        </div>
+
+        <div class="status-card__item">
+          <div class="status-card__icon" aria-hidden="true">🔄</div>
+          <div class="status-card__body">
+            <p class="status-card__label">Garantia de Reembolso</p>
+            <p class="status-card__value">30 dias sem perguntas, sem burocracia</p>
+          </div>
+          <span class="status-card__badge badge--green">30 dias</span>
+        </div>
+
+      </div>
+
+      <!-- Botão de ação -->
+      <div class="actions">
+        <a href="mailto:bookie.bra@proton.me" class="btn-secondary">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Falar com Suporte
+        </a>
+      </div>
+
+      <!-- Linha de confiança -->
+      <div class="trust-row" role="list">
+        <div class="trust-item" data-icon="🔒" role="listitem">Compra 100% Segura</div>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-item" data-icon="🛡️" role="listitem">Protegido pela LGPD</div>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-item" data-icon="⭐" role="listitem">+12.400 alunos satisfeitos</div>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-item" data-icon="♾️" role="listitem">Acesso vitalício</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">
+          &copy; <span id="footer-year"></span> Bookie Brasil · Todos os direitos reservados.
+        </p>
+        <nav class="footer__links" aria-label="Links do rodapé">
+          <a href="mailto:bookie.bra@proton.me">Contato &amp; Suporte</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Ano no footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // ── Partículas flutuantes
+    (function createParticles() {
+      const wrap = document.getElementById('particles');
+      const count = window.innerWidth < 600 ? 12 : 24;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 3 + 1.5;
+        p.style.cssText = `
+          left: ${Math.random() * 100}%;
+          width: ${size}px;
+          height: ${size}px;
+          animation-duration: ${Math.random() * 12 + 8}s;
+          animation-delay: ${Math.random() * 10}s;
+          opacity: 0;
+        `;
+        wrap.appendChild(p);
+      }
+    })();
+
+    // ── Confetti burst no carregamento
+    (function createConfetti() {
+      const wrap = document.getElementById('confetti');
+      const colors = ['#4169E1','#5a80f5','#a0b8ff','#ffffff','#2a4dc7','#7aa0ff'];
+      const count = window.innerWidth < 600 ? 40 : 80;
+      for (let i = 0; i < count; i++) {
+        const c = document.createElement('div');
+        c.className = 'conf';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const startX = Math.random() * 100;
+        const dur    = Math.random() * 2.5 + 1.8;
+        const delay  = Math.random() * 1.2;
+        const w      = Math.random() * 7 + 4;
+        const h      = Math.random() * 10 + 5;
+        c.style.cssText = `
+          left: ${startX}%;
+          top: 0;
+          width: ${w}px;
+          height: ${h}px;
+          background: ${color};
+          border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+          animation-duration: ${dur}s;
+          animation-delay: ${delay}s;
+        `;
+        wrap.appendChild(c);
+      }
+      // Remove após as animações
+      setTimeout(() => wrap.remove(), 5500);
+    })();
+  </script>
+
+</body>
+</html>
