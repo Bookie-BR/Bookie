@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookie Brasil — Links</title>
+  <meta name="description" content="Todos os links da Bookie Brasil em um só lugar." />
+  <meta property="og:title" content="Bookie Brasil — Links" />
+  <meta property="og:description" content="Acesse nossos eBooks, redes sociais e muito mais." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════
+       VARIÁVEIS — edite aqui para customizar
+    ═══════════════════════════════════════ */
+    :root {
+      --clr-bg:          #000000;
+      --clr-white:       #ffffff;
+      --clr-gray-100:    #f0f0f0;
+      --clr-gray-300:    #a0a0a0;
+      --clr-gray-500:    #505050;
+      --clr-blue:        #4169E1;
+      --clr-blue-bright: #5a80f5;
+      --clr-blue-deep:   #2a4dc7;
+      --clr-blue-glow:   rgba(65,105,225,0.45);
+
+      --glass-bg:        rgba(255,255,255,0.07);
+      --glass-bg-hover:  rgba(255,255,255,0.11);
+      --glass-border:    rgba(255,255,255,0.10);
+      --glass-blur:      28px;
+
+      --font-display:    'Syne', sans-serif;
+      --font-body:       'DM Sans', sans-serif;
+
+      --sp-xs:  0.4rem;
+      --sp-sm:  0.75rem;
+      --sp-md:  1.25rem;
+      --sp-lg:  2rem;
+      --sp-xl:  3rem;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 100px;
+
+      /* Largura máxima da coluna de links */
+      --col-w: 480px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── FUNDO ANIMADO ── */
+    .bg-glow {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    }
+
+    .bg-glow::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -5%,  rgba(65,105,225,0.20) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 90% 95%,  rgba(65,105,225,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 5%  80%,  rgba(90,128,245,0.07) 0%, transparent 50%);
+      animation: bgDrift 18s ease-in-out infinite alternate;
+    }
+
+    /* Textura de ruído sutil */
+    .bg-glow::after {
+      content: '';
+      position: absolute; inset: 0; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    @keyframes bgDrift {
+      0%   { transform: scale(1) translate(0, 0); }
+      50%  { transform: scale(1.03) translate(1%, 1.5%); }
+      100% { transform: scale(0.98) translate(-1%, 0.5%); }
+    }
+
+    /* ── PARTÍCULAS ── */
+    .particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: var(--clr-blue-bright); opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      8%   { opacity: 0.5; }
+      92%  { opacity: 0.2; }
+      100% { transform: translateY(-8vh) scale(1.4); opacity: 0; }
+    }
+
+    /* ══════════════════════════════════
+       LAYOUT PRINCIPAL
+    ══════════════════════════════════ */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--sp-xl) var(--sp-md) calc(var(--sp-xl) * 1.5);
+    }
+
+    .col {
+      width: 100%;
+      max-width: var(--col-w);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0;
+    }
+
+    /* ══════════════════════════════════
+       PERFIL — avatar + nome + bio
+    ══════════════════════════════════ */
+    .profile {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      gap: var(--sp-sm);
+      margin-bottom: var(--sp-lg);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    /* Avatar ring */
+    .avatar-wrap {
+      position: relative;
+      width: 92px; height: 92px;
+      margin-bottom: var(--sp-xs);
+      flex-shrink: 0;
+    }
+
+    /* Anel girante */
+    .avatar-wrap__ring {
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      border-top-color: var(--clr-blue-bright);
+      border-right-color: rgba(65,105,225,0.25);
+      animation: spin 4s linear infinite;
+    }
+    .avatar-wrap__ring2 {
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-bottom-color: rgba(90,128,245,0.35);
+      animation: spinRev 7s linear infinite;
+    }
+
+    @keyframes spin    { to { transform: rotate(360deg); } }
+    @keyframes spinRev { to { transform: rotate(-360deg); } }
+
+    /* Disco do avatar */
+    .avatar-wrap__disc {
+      position: relative;
+      width: 92px; height: 92px; border-radius: 50%;
+      background: rgba(65,105,225,0.14);
+      border: 1px solid rgba(65,105,225,0.35);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      box-shadow:
+        0 0 28px rgba(65,105,225,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* Imagem de avatar — substitua o src pelo caminho real */
+    .avatar-wrap__img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      display: block;
+    }
+
+    /* Fallback: iniciais exibidas quando não há imagem */
+    .avatar-wrap__initials {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--clr-blue-bright);
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+
+    /* Logo da marca dentro do avatar */
+    .avatar-wrap__logo {
+      width: 70%; height: auto;
+    }
+
+    /* Nome */
+    .profile__name {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 5vw, 1.6rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Handle / @usuario */
+    .profile__handle {
+      font-size: 0.82rem; font-weight: 400;
+      color: var(--clr-blue-bright);
+      letter-spacing: 0.05em;
+    }
+
+    /* Bio */
+    .profile__bio {
+      font-size: 0.9rem; font-weight: 300;
+      color: var(--clr-gray-300); line-height: 1.65;
+      max-width: 340px;
+    }
+
+    /* Badges de prova social */
+    .profile__stats {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-sm);
+      margin-top: var(--sp-xs);
+    }
+
+    .stat-pill {
+      display: flex; align-items: center; gap: 0.35rem;
+      padding: 0.28rem 0.75rem; border-radius: var(--radius-pill);
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      font-size: 0.72rem; font-weight: 500;
+      color: var(--clr-gray-300);
+    }
+
+    .stat-pill b { font-weight: 700; color: var(--clr-white); }
+
+    /* ══════════════════════════════════
+       GRUPOS DE LINKS
+    ══════════════════════════════════ */
+    .links-wrap {
+      width: 100%;
+      display: flex; flex-direction: column;
+      gap: var(--sp-xs);
+    }
+
+    /* Separador de seção com label */
+    .section-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--clr-gray-500);
+      text-align: center;
+      padding: var(--sp-md) 0 var(--sp-xs);
+    }
+
+    .section-label:first-child { padding-top: 0; }
+
+    /* ── CARD DE LINK ── */
+    .link-card {
+      position: relative;
+      display: flex; align-items: center;
+      gap: var(--sp-md);
+      width: 100%;
+      padding: var(--sp-md) var(--sp-md);
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform 0.35s cubic-bezier(0.23,1,0.32,1),
+        box-shadow 0.35s cubic-bezier(0.23,1,0.32,1),
+        border-color 0.25s,
+        background 0.25s;
+      box-shadow:
+        0 4px 20px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+      text-decoration: none; color: inherit;
+    }
+
+    /* Borda gradiente no hover */
+    .link-card::before {
+      content: '';
+      position: absolute; inset: 0; border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(65,105,225,0) 0%, rgba(65,105,225,0.7) 50%, rgba(255,255,255,0.15) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.35s; pointer-events: none;
+    }
+
+    /* Reflexo líquido no hover */
+    .link-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 60%; height: 200%;
+      background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.04) 50%, transparent 80%);
+      transform: skewX(-20deg) translateX(-100%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px) scale(1.012);
+      background: var(--glass-bg-hover);
+      border-color: rgba(65,105,225,0.35);
+      box-shadow:
+        0 12px 36px rgba(0,0,0,0.45),
+        0 0 28px rgba(65,105,225,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+
+    .link-card:hover::before { opacity: 1; }
+    .link-card:hover::after  { transform: skewX(-20deg) translateX(400%); }
+
+    .link-card:active {
+      transform: translateY(-1px) scale(1.005);
+      transition-duration: 0.1s;
+    }
+
+    /* Ícone do link */
+    .link-card__icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.25rem; line-height: 1;
+      position: relative; z-index: 1;
+    }
+
+    /* Variantes de cor do ícone */
+    .icon--blue {
+      background: rgba(65,105,225,0.18);
+      border: 1px solid rgba(65,105,225,0.30);
+      box-shadow: 0 0 14px rgba(65,105,225,0.20);
+    }
+    .icon--white {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .icon--green {
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.22);
+    }
+    .icon--pink {
+      background: rgba(236,72,153,0.12);
+      border: 1px solid rgba(236,72,153,0.22);
+    }
+    .icon--purple {
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.22);
+    }
+    .icon--orange {
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.22);
+    }
+    .icon--gold {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.22);
+    }
+
+    /* Corpo do texto */
+    .link-card__body {
+      flex: 1; min-width: 0;
+      position: relative; z-index: 1;
+    }
+
+    .link-card__title {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--clr-white);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+
+    .link-card__sub {
+      font-size: 0.76rem; font-weight: 300;
+      color: var(--clr-gray-300); line-height: 1.4;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* Badge opcional no canto direito */
+    .link-card__badge {
+      flex-shrink: 0;
+      padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      position: relative; z-index: 1;
+    }
+
+    .badge-blue   { background: rgba(65,105,225,0.20); color: var(--clr-blue-bright); border: 1px solid rgba(65,105,225,0.30); }
+    .badge-green  { background: rgba(34,197,94,0.15);  color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+    .badge-gold   { background: rgba(212,175,55,0.18); color: #f0c040; border: 1px solid rgba(212,175,55,0.30); }
+    .badge-pink   { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.25); }
+    .badge-red    { background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+
+    /* Seta → */
+    .link-card__arrow {
+      flex-shrink: 0; position: relative; z-index: 1;
+      width: 18px; height: 18px;
+      stroke: var(--clr-gray-500); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke 0.25s, transform 0.25s;
+    }
+    .link-card:hover .link-card__arrow {
+      stroke: var(--clr-blue-bright);
+      transform: translateX(3px);
+    }
+
+    /* ── CARD DESTAQUE (primário) ── */
+    .link-card--featured {
+      background: linear-gradient(135deg, rgba(65,105,225,0.22) 0%, rgba(42,77,199,0.16) 100%);
+      border-color: rgba(65,105,225,0.40);
+      box-shadow:
+        0 8px 32px rgba(65,105,225,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    .link-card--featured:hover {
+      box-shadow:
+        0 16px 48px rgba(65,105,225,0.35),
+        0 0 40px rgba(65,105,225,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* ══════════════════════════════════
+       REDES SOCIAIS (ícones menores)
+    ══════════════════════════════════ */
+    .socials {
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: var(--sp-sm);
+      margin-top: var(--sp-lg);
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    .social-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      font-size: 1.2rem; line-height: 1;
+      transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      background: rgba(65,105,225,0.18);
+      border-color: rgba(65,105,225,0.40);
+      box-shadow: 0 8px 20px rgba(65,105,225,0.25);
+    }
+
+    /* ══════════════════════════════════
+       RODAPÉ
+    ══════════════════════════════════ */
+    .page-footer {
+      margin-top: var(--sp-xl);
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-xs);
+      animation: fadeUp 0.7s 0.6s ease both;
+    }
+
+    .page-footer__logo svg { height: 18px; width: auto; opacity: 0.35; transition: opacity 0.2s; }
+    .page-footer__logo:hover svg { opacity: 0.7; }
+
+    .page-footer__copy {
+      font-size: 0.7rem; font-weight: 300; color: var(--clr-gray-500);
+    }
+
+    /* ══════════════════════════════════
+       ANIMAÇÕES DE ENTRADA
+    ══════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger nos cards */
+    .link-card { animation: fadeUp 0.55s ease both; }
+
+    /* ══════════════════════════════════
+       SCROLLBAR
+    ══════════════════════════════════ */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: var(--clr-blue-deep); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo e partículas -->
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="col">
+
+      <!-- ════════════════════════════════════════
+           PERFIL
+      ════════════════════════════════════════ -->
+      <div class="profile">
+
+        <!-- Avatar — troque o SVG por uma <img> se tiver foto -->
+        <div class="avatar-wrap" aria-hidden="true">
+          <div class="avatar-wrap__ring"></div>
+          <div class="avatar-wrap__ring2"></div>
+          <div class="avatar-wrap__disc">
+            <!-- Opção A: usar o logo Bookie como avatar (padrão) -->
+            <svg class="avatar-wrap__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 594.938 70.5">
+              <path fill="#5a80f5" fill-rule="evenodd" d="M222.5,526.941h66.089q31.659,0,31.658-20.175v-1.32a16.645,16.645,0,0,0-1.747-7.731,13.957,13.957,0,0,0-4.625-5.326,34.307,34.307,0,0,0-5.242-2.969,27.015,27.015,0,0,0-4.831-1.6,19.842,19.842,0,0,0,3.494-1.32,27.167,27.167,0,0,0,3.907-2.405,11.046,11.046,0,0,0,3.443-4.148,12.874,12.874,0,0,0,1.285-5.8v-1.32q0-7.071-6.372-11.549T287.973,456.8H222.5v70.142Zm23.949-55.34h37.414q8.323,0,8.326,5.562v0.189q0,5.655-8.326,5.656H246.449V471.6Zm39.469,26.3q9.457,0,9.457,6.507v0.377a6.626,6.626,0,0,1-2.056,4.808q-2.055,2.073-7.4,2.074H246.449V497.9h39.469Zm264.594-40.774H374.866a86.518,86.518,0,0,0-19.789,2.037,46.175,46.175,0,0,0-13.834,5.313,29.829,29.829,0,0,0-8.5,7.846,28.846,28.846,0,0,0-4.527,9.018,34.755,34.755,0,0,0-1.241,9.388v2.225a35.423,35.423,0,0,0,1.241,9.45,29.408,29.408,0,0,0,4.59,9.2,30.709,30.709,0,0,0,8.56,8.033,47.134,47.134,0,0,0,13.834,5.5,81.655,81.655,0,0,0,19.789,2.161H550.512q47.766,0,47.766-34.343v-2.225Q598.278,457.13,550.512,457.129Zm22.8,35.074q0,6.321-5.789,10.87-5.313,4.175-17.028,4.517c-0.695.021-172.615,0.03-173.344,0.03q-13.375,0-19.165-4.547t-5.788-10.87v-0.557q0-6.543,5.724-10.816t19.229-4.271h0.129c0.59,0,172.377.007,172.945,0.02q11.9,0.27,17.3,4.306,5.792,4.327,5.788,10.76V492.2h0ZM439.139,505.016h28.226L486.114,479.2H457.889ZM666.513,527h28.4l-41.849-37.579,39.98-31.624H665.393L638.012,479.98H629.8V457.8H608.038V527H629.8V500.81h7.262Zm57.862-69.878H700.538v69.817h23.837V457.122Zm11.463-.323v70.143h81.61v-16.31h-57.97v-11.5h55.606V483.1H759.478v-10.37H816.42V456.8H735.838Z" transform="translate(-222.5 -456.812)"/>
+            </svg>
+            <!-- Opção B: usar uma foto — remova o SVG acima e descomente:
+            <img class="avatar-wrap__img" src="foto-perfil.jpg" alt="Bookie Brasil" />
+            -->
+          </div>
+        </div>
+
+        <!--
+          EDITE AQUI: nome, handle e bio do perfil
+        -->
+        <h1 class="profile__name">Bookie Brasil</h1>
+        <p class="profile__handle">@bookiebrasil</p>
+        <p class="profile__bio">
+          Conhecimento que transforma. eBooks premium para quem quer crescer de verdade.
+        </p>
+
+        <!-- Estatísticas — edite os números abaixo -->
+        <div class="profile__stats">
+          <div class="stat-pill"><b>12.4k+</b> alunos</div>
+          <div class="stat-pill"><b>4.9 ★</b> avaliação</div>
+          <div class="stat-pill"><b>30d</b> garantia</div>
+        </div>
+
+      </div><!-- /profile -->
+
+
+      <!-- ════════════════════════════════════════
+           LINKS
+           ─────────────────────────────────────
+           COMO EDITAR:
+           O array `links` no <script> abaixo
+           controla todos os cards e ícones sociais.
+           Edite lá — o HTML é gerado automaticamente.
+      ════════════════════════════════════════ -->
+      <div class="links-wrap" id="links-wrap"></div>
+
+      <!-- Ícones de redes sociais (gerados via JS) -->
+      <div class="socials" id="socials"></div>
+
+      <!-- Rodapé -->
+      <div class="page-footer">
+        <a href="#" class="page-footer__logo" aria-label="Bookie Brasil">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 594.938 70.5" aria-hidden="true">
+            <path fill="#ffffff" fill-rule="evenodd" d="M222.5,526.941h66.089q31.659,0,31.658-20.175v-1.32a16.645,16.645,0,0,0-1.747-7.731,13.957,13.957,0,0,0-4.625-5.326,34.307,34.307,0,0,0-5.242-2.969,27.015,27.015,0,0,0-4.831-1.6,19.842,19.842,0,0,0,3.494-1.32,27.167,27.167,0,0,0,3.907-2.405,11.046,11.046,0,0,0,3.443-4.148,12.874,12.874,0,0,0,1.285-5.8v-1.32q0-7.071-6.372-11.549T287.973,456.8H222.5v70.142Zm23.949-55.34h37.414q8.323,0,8.326,5.562v0.189q0,5.655-8.326,5.656H246.449V471.6Zm39.469,26.3q9.457,0,9.457,6.507v0.377a6.626,6.626,0,0,1-2.056,4.808q-2.055,2.073-7.4,2.074H246.449V497.9h39.469Zm264.594-40.774H374.866a86.518,86.518,0,0,0-19.789,2.037,46.175,46.175,0,0,0-13.834,5.313,29.829,29.829,0,0,0-8.5,7.846,28.846,28.846,0,0,0-4.527,9.018,34.755,34.755,0,0,0-1.241,9.388v2.225a35.423,35.423,0,0,0,1.241,9.45,29.408,29.408,0,0,0,4.59,9.2,30.709,30.709,0,0,0,8.56,8.033,47.134,47.134,0,0,0,13.834,5.5,81.655,81.655,0,0,0,19.789,2.161H550.512q47.766,0,47.766-34.343v-2.225Q598.278,457.13,550.512,457.129Zm22.8,35.074q0,6.321-5.789,10.87-5.313,4.175-17.028,4.517c-0.695.021-172.615,0.03-173.344,0.03q-13.375,0-19.165-4.547t-5.788-10.87v-0.557q0-6.543,5.724-10.816t19.229-4.271h0.129c0.59,0,172.377.007,172.945,0.02q11.9,0.27,17.3,4.306,5.792,4.327,5.788,10.76V492.2h0ZM439.139,505.016h28.226L486.114,479.2H457.889ZM666.513,527h28.4l-41.849-37.579,39.98-31.624H665.393L638.012,479.98H629.8V457.8H608.038V527H629.8V500.81h7.262Zm57.862-69.878H700.538v69.817h23.837V457.122Zm11.463-.323v70.143h81.61v-16.31h-57.97v-11.5h55.606V483.1H759.478v-10.37H816.42V456.8H735.838Z" transform="translate(-222.5 -456.812)"/>
+          </svg>
+        </a>
+        <p class="page-footer__copy">&copy; <span id="footer-year"></span> Bookie Brasil</p>
+      </div>
+
+    </div><!-- /col -->
+  </div><!-- /page -->
+
+  <script>
+    // ════════════════════════════════════════════════════════════════
+    // CONFIGURAÇÃO DE LINKS
+    // ────────────────────────────────────────────────────────────────
+    // COMO ADICIONAR um link:
+    //   Copie qualquer objeto { ... } e cole antes do ]; final.
+    //   Lembre-se da vírgula após o item anterior.
+    //
+    // COMO REMOVER um link:
+    //   Apague o objeto inteiro (incluindo a vírgula separadora).
+    //
+    // CAMPOS DISPONÍVEIS:
+    //   tipo       → "link" para card normal | "social" para ícone redondo no rodapé
+    //   secao      → (opcional) texto do separador de seção acima do item
+    //   icone      → emoji exibido no ícone do card
+    //   iconeCor   → classe de cor do ícone: "blue" | "white" | "green" |
+    //                "pink" | "purple" | "orange" | "gold"
+    //   titulo     → título principal do card
+    //   sub        → subtítulo / descrição curta
+    //   url        → link de destino (use "#" como placeholder)
+    //   badge      → (opcional) texto do badge ex: "Novo" | "Off" | "Hot"
+    //   badgeCor   → classe de cor: "blue" | "green" | "gold" | "pink" | "red"
+    //   destaque   → true = card com fundo azul destacado
+    //   novaAba    → true = abre em nova aba (padrão para links externos)
+    // ════════════════════════════════════════════════════════════════
+    var links = [
+
+      // ── SEÇÃO: DESTAQUES ──────────────────────────────────────────
+
+      {
+        tipo:     "link",
+        secao:    "Destaques",               // rótulo de seção acima deste item
+        icone:    "📚",
+        iconeCor: "blue",
+        titulo:   "Ver Catálogo Completo",
+        sub:      "Todos os eBooks com até 66% OFF",
+        url:      "index.html",              // ← substitua pelo link real
+        badge:    "Hot",
+        badgeCor: "red",
+        destaque: true,
+        novaAba:  false
+      },
+
+      {
+        tipo:     "link",
+        icone:    "⚡",
+        iconeCor: "gold",
+        titulo:   "Oferta por Tempo Limitado",
+        sub:      "Apenas 48h — não perca",
+        url:      "#",                       // ← substitua pelo link real
+        badge:    "48h",
+        badgeCor: "gold",
+        destaque: false,
+        novaAba:  false
+      },
+
+      // ── SEÇÃO: EBOOKS POPULARES ───────────────────────────────────
+
+      {
+        tipo:     "link",
+        secao:    "eBooks Populares",
+        icone:    "🥗",
+        iconeCor: "green",
+        titulo:   "Guia Definitivo do Emagrecimento",
+        sub:      "De R$ 97 por R$ 37 · Best-seller",
+        url:      "#",
+        badge:    "62% off",
+        badgeCor: "green",
+        novaAba:  false
+      },
+
+      {
+        tipo:     "link",
+        icone:    "📈",
+        iconeCor: "blue",
+        titulo:   "Marketing Digital Completo",
+        sub:      "Do zero ao avançado em semanas",
+        url:      "#",
+        badge:    "Novo",
+        badgeCor: "blue",
+        novaAba:  false
+      },
+
+      {
+        tipo:     "link",
+        icone:    "💰",
+        iconeCor: "gold",
+        titulo:   "Investindo do Zero",
+        sub:      "+4.100 alunos · N.º 1 em finanças",
+        url:      "#",
+        novaAba:  false
+      },
+
+      {
+        tipo:     "link",
+        icone:    "✍️",
+        iconeCor: "purple",
+        titulo:   "Copywriting que Converte",
+        sub:      "50+ templates prontos para usar",
+        url:      "#",
+        novaAba:  false
+      },
+
+      // ── SEÇÃO: SUPORTE ────────────────────────────────────────────
+
+      {
+        tipo:     "link",
+        secao:    "Suporte & Contato",
+        icone:    "✉️",
+        iconeCor: "white",
+        titulo:   "Falar com Suporte",
+        sub:      "bookie.bra@proton.me",
+        url:      "mailto:bookie.bra@proton.me",
+        novaAba:  false
+      },
+
+      {
+        tipo:     "link",
+        icone:    "🔒",
+        iconeCor: "white",
+        titulo:   "Política de Privacidade",
+        sub:      "Protegido pela LGPD (Lei nº 13.709/2018)",
+        url:      "politica-de-privacidade.html",
+        novaAba:  false
+      },
+
+      // ── ÍCONES SOCIAIS (aparecem no rodapé como bolinhas) ─────────
+
+      {
+        tipo:    "social",
+        icone:   "📸",              // ← troque pelo emoji da rede
+        label:   "Instagram",
+        url:     "https://instagram.com/bookiebrasil"   // ← substitua
+      },
+
+      {
+        tipo:    "social",
+        icone:   "▶️",
+        label:   "YouTube",
+        url:     "https://youtube.com/@bookiebrasil"    // ← substitua
+      },
+
+      {
+        tipo:    "social",
+        icone:   "💬",
+        label:   "WhatsApp",
+        url:     "https://wa.me/5511999999999"          // ← substitua
+      },
+
+      {
+        tipo:    "social",
+        icone:   "✉️",
+        label:   "E-mail",
+        url:     "mailto:bookie.bra@proton.me"
+      }
+
+      // ── Para adicionar mais itens, cole acima desta linha ──────────
+      // Lembre-se de adicionar vírgula após o último item antes daqui!
+
+    ]; // ← fim do array
+
+
+    // ════════════════════════════════════════════════════════════════
+    // RENDERIZAÇÃO — não é necessário editar abaixo desta linha
+    // ════════════════════════════════════════════════════════════════
+
+    (function render() {
+      var linksWrap  = document.getElementById('links-wrap');
+      var socialsWrap = document.getElementById('socials');
+      var lastSecao  = null;
+      var delay      = 0;
+
+      links.forEach(function(item) {
+
+        // ── Ícone social (rodapé) ──────────────────────────────────
+        if (item.tipo === 'social') {
+          var btn = document.createElement('a');
+          btn.className = 'social-btn';
+          btn.href      = item.url;
+          btn.setAttribute('aria-label', item.label);
+          if (item.url.startsWith('http')) btn.target = '_blank';
+          btn.setAttribute('rel', 'noopener');
+          btn.textContent = item.icone;
+          btn.style.animationDelay = delay + 's';
+          btn.style.animation = 'fadeUp 0.55s ' + delay + 's ease both';
+          socialsWrap.appendChild(btn);
+          delay += 0.06;
+          return;
+        }
+
+        // ── Separador de seção ────────────────────────────────────
+        if (item.secao && item.secao !== lastSecao) {
+          var lbl = document.createElement('p');
+          lbl.className   = 'section-label';
+          lbl.textContent = item.secao;
+          linksWrap.appendChild(lbl);
+          lastSecao = item.secao;
+        }
+
+        // ── Card de link ──────────────────────────────────────────
+        var card = document.createElement('a');
+        card.href      = item.url;
+        card.className = 'link-card' + (item.destaque ? ' link-card--featured' : '');
+        if (item.novaAba || (item.url.startsWith('http') && !item.url.startsWith('mailto'))) {
+          card.target = '_blank';
+          card.setAttribute('rel', 'noopener');
+        }
+        card.style.animationDelay = delay + 's';
+
+        // Ícone
+        var iconDiv = document.createElement('div');
+        iconDiv.className   = 'link-card__icon icon--' + (item.iconeCor || 'blue');
+        iconDiv.textContent = item.icone;
+        iconDiv.setAttribute('aria-hidden', 'true');
+
+        // Corpo
+        var body  = document.createElement('div');
+        body.className = 'link-card__body';
+
+        var title = document.createElement('p');
+        title.className   = 'link-card__title';
+        title.textContent = item.titulo;
+
+        body.appendChild(title);
+
+        if (item.sub) {
+          var sub    = document.createElement('p');
+          sub.className   = 'link-card__sub';
+          sub.textContent = item.sub;
+          body.appendChild(sub);
+        }
+
+        // Badge (opcional)
+        if (item.badge) {
+          var badge = document.createElement('span');
+          badge.className   = 'link-card__badge badge-' + (item.badgeCor || 'blue');
+          badge.textContent = item.badge;
+          card.appendChild(iconDiv);
+          card.appendChild(body);
+          card.appendChild(badge);
+        } else {
+          card.appendChild(iconDiv);
+          card.appendChild(body);
+        }
+
+        // Seta
+        var arrowNS  = 'http://www.w3.org/2000/svg';
+        var arrowSvg = document.createElementNS(arrowNS, 'svg');
+        arrowSvg.setAttribute('viewBox', '0 0 24 24');
+        arrowSvg.setAttribute('class', 'link-card__arrow');
+        arrowSvg.setAttribute('aria-hidden', 'true');
+        var line1 = document.createElementNS(arrowNS, 'polyline');
+        line1.setAttribute('points', '9 18 15 12 9 6');
+        arrowSvg.appendChild(line1);
+        card.appendChild(arrowSvg);
+
+        linksWrap.appendChild(card);
+        delay += 0.07;
+      });
+    })();
+
+    // Ano no footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Partículas
+    (function() {
+      var wrap = document.getElementById('particles');
+      var n    = window.innerWidth < 600 ? 10 : 20;
+      for (var i = 0; i < n; i++) {
+        var p  = document.createElement('div');
+        p.className = 'particle';
+        var sz = Math.random() * 2.5 + 1;
+        p.style.cssText = 'left:' + (Math.random()*100) + '%;width:' + sz + 'px;height:' + sz + 'px;animation-duration:' + (Math.random()*14+9) + 's;animation-delay:' + (Math.random()*12) + 's;';
+        wrap.appendChild(p);
+      }
+    })();
+  </script>
+
+</body>
+</html>
