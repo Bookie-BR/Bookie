@@ -358,7 +358,7 @@
       width: 100%;
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.16em; text-transform: uppercase;
-      color: #a3a7c0;
+      color: var(--g500);
       margin-bottom: -0.1rem;
     }
 
@@ -369,11 +369,9 @@
       gap: 0.75rem;
     }
 
-    /* Mobile: Eduzz ocupa linha inteira, Kiwify+Kindle dividem a segunda */
+    /* Mobile: grade 2×2 — todos dividem espaço igual */
     @media (max-width: 480px) {
-      .hero-card__buy--primary { flex: 1 1 100%; }
-      .hero-card__buy--secondary,
-      .hero-card__buy--muted    { flex: 1 1 calc(50% - 0.25rem); }
+      .hero-card__buy { flex: 1 1 calc(50% - 0.25rem); }
     }
     .hero-card::before {
       content: ''; position: absolute;
@@ -719,6 +717,13 @@
             label:   "Kiwify",
             icon:    "🌿",
             url:     "https://pay.kiwify.com.br/dXc1NQU",
+            estilo:  "secondary",
+            novaAba: true
+          },
+          {
+            label:   "Hotmart",
+            icon:    "🔥",
+            url:     "https://pay.hotmart.com/X105190044L",
             estilo:  "secondary",
             novaAba: true
           },
