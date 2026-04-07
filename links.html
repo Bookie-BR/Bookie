@@ -304,30 +304,83 @@
 
     /* ── HERO BUY BUTTONS ── */
     .hero-card__btns {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      display: flex; gap: 0.5rem; flex-wrap: wrap; width: 100%;
     }
     .hero-card__buy {
       flex: 1 1 auto; min-width: 0;
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
       padding: 0.6rem 0.85rem; border-radius: var(--pill);
       font-family: var(--dm); font-size: 0.75rem; font-weight: 600;
       letter-spacing: 0.01em; cursor: pointer; white-space: nowrap;
       text-decoration: none; border: none;
-      transition: transform 0.2s cubic-bezier(0.23,1,0.32,1),
-                  box-shadow 0.2s ease, opacity 0.2s ease;
+      transition: transform 0.22s cubic-bezier(0.23,1,0.32,1),
+                  box-shadow 0.22s ease, opacity 0.2s ease;
       position: relative; z-index: 2;
     }
     .hero-card__buy:not([disabled]):hover { transform: translateY(-2px); }
     .hero-card__buy:not([disabled]):active { transform: scale(0.97); }
 
+    /* ── PRIMARY: Eduzz — destaque total, linha própria ── */
     .hero-card__buy--primary {
-      background: linear-gradient(135deg, var(--blue-hi) 0%, var(--blue) 100%);
+      flex: 0 0 100%;
+      padding: 0.82rem 1.25rem;
+      background: linear-gradient(130deg, #6080f8 0%, #4169E1 55%, #1e3ab8 100%);
       color: #fff;
-      box-shadow: 0 4px 18px rgba(65,105,225,0.45);
+      font-size: 0.88rem;
+      box-shadow: 0 4px 22px rgba(65,105,225,0.55), 0 0 0 1px rgba(120,160,255,0.25) inset;
+      animation: eduzzGlow 2.8s ease-in-out infinite;
+      overflow: visible;
+    }
+    .hero-card__buy--primary::after {
+      content: '★ Melhor oferta';
+      position: absolute; top: -9px; right: 12px;
+      background: linear-gradient(90deg, #f0c040, #e6a800);
+      color: #0a0a0a; font-family: var(--syne);
+      font-size: 0.52rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.18rem 0.55rem; border-radius: var(--pill);
+      box-shadow: 0 2px 8px rgba(212,175,55,0.45);
+      white-space: nowrap; pointer-events: none;
     }
     .hero-card__buy--primary:hover {
-      box-shadow: 0 8px 28px rgba(65,105,225,0.6);
+      box-shadow: 0 8px 36px rgba(65,105,225,0.75), 0 0 0 1px rgba(120,160,255,0.3) inset;
     }
+    @keyframes eduzzGlow {
+      0%,100% { box-shadow: 0 4px 22px rgba(65,105,225,0.55), 0 0 0 1px rgba(120,160,255,0.25) inset; }
+      50%      { box-shadow: 0 6px 38px rgba(65,105,225,0.80), 0 0 0 1px rgba(120,160,255,0.35) inset; }
+    }
+
+    /* ── KIWIFY — verde ── */
+    .hero-card__buy--kiwify {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: #fff;
+      box-shadow: 0 3px 14px rgba(34,197,94,0.30);
+    }
+    .hero-card__buy--kiwify:hover {
+      box-shadow: 0 6px 24px rgba(34,197,94,0.50);
+    }
+
+    /* ── HOTMART — laranja ── */
+    .hero-card__buy--hotmart {
+      background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+      color: #fff;
+      box-shadow: 0 3px 14px rgba(249,115,22,0.30);
+    }
+    .hero-card__buy--hotmart:hover {
+      box-shadow: 0 6px 24px rgba(249,115,22,0.50);
+    }
+
+    /* ── AMAZON / KINDLE — âmbar ── */
+    .hero-card__buy--amazon {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #0a0a0a;
+      box-shadow: 0 3px 14px rgba(245,158,11,0.30);
+    }
+    .hero-card__buy--amazon:hover {
+      box-shadow: 0 6px 24px rgba(245,158,11,0.50);
+    }
+
+    /* ── SECONDARY (fallback) ── */
     .hero-card__buy--secondary {
       background: rgba(255,255,255,0.07);
       color: var(--g100);
@@ -338,28 +391,33 @@
       background: rgba(255,255,255,0.12);
       border-color: rgba(255,255,255,0.28);
     }
+
+    /* ── MUTED ── */
     .hero-card__buy--muted {
       background: rgba(255,255,255,0.04);
       color: var(--g500);
       border: 1px solid rgba(255,255,255,0.07);
       cursor: not-allowed;
     }
+
     .hero-card__buy .buy-icon { font-size: 0.9em; line-height: 1; }
     .hero-card__buy-inner {
       display: flex; flex-direction: column; align-items: center; line-height: 1.2;
     }
     .hero-card__buy-via {
-      font-size: 0.62rem; font-weight: 400; opacity: 0.65; letter-spacing: 0.04em;
+      font-size: 0.6rem; font-weight: 400; opacity: 0.75; letter-spacing: 0.04em;
     }
+    .hero-card__buy--primary .hero-card__buy-via { opacity: 0.85; }
     .hero-card__buy-name {
       font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em;
     }
+    .hero-card__buy--primary .hero-card__buy-name { font-size: 0.92rem; }
     .hero-card__btns-label {
       width: 100%;
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.16em; text-transform: uppercase;
       color: #878a9c;
-      margin-bottom: -0.1rem;
+      margin-bottom: 0.15rem;
     }
 
     /* Footer em coluna quando há múltiplos botões de compra */
@@ -369,9 +427,11 @@
       gap: 0.75rem;
     }
 
-    /* Mobile: grade 2×2 — todos dividem espaço igual */
-    @media (max-width: 480px) {
-      .hero-card__buy { flex: 1 1 calc(50% - 0.25rem); }
+    /* Mobile: secondary buttons share row 50/50 */
+    @media (max-width: 520px) {
+      .hero-card__buy:not(.hero-card__buy--primary) {
+        flex: 1 1 calc(50% - 0.25rem);
+      }
     }
     .hero-card::before {
       content: ''; position: absolute;
@@ -717,23 +777,23 @@
             label:   "Kiwify",
             icon:    "🌿",
             url:     "https://pay.kiwify.com.br/dXc1NQU",
-            estilo:  "secondary",
+            estilo:  "kiwify",
             novaAba: true
           },
           {
             label:   "Hotmart",
             icon:    "🔥",
             url:     "https://pay.hotmart.com/X105190044L",
-            estilo:  "secondary",
+            estilo:  "hotmart",
             novaAba: true
           },
           {
-            label:   "Amazon",
+            label:   "Kindle",
             icon:    "📖",
             url:     "https://a.co/d/08sKMrQr",
-            estilo:  "secondary",
+            estilo:  "amazon",
             novaAba: true,
-            titulo:  "Kindle"
+            titulo:  "Amazon Kindle"
           }
         ],
         novaAba:       true
@@ -883,7 +943,7 @@
                 attrs = ' type="button" disabled';
               }
               var tipAttr = btn.titulo ? ' title="'+btn.titulo+'"' : '';
-              var viaText = (btn.estilo === 'muted') ? 'Em breve' : 'via';
+              var viaText = (btn.estilo === 'muted') ? 'Em breve' : (btn.estilo === 'primary') ? 'comprar via' : 'via';
               botoesHTML += '<'+tag+' class="'+cls+'"'+attrs+tipAttr+'>';
               botoesHTML += '<span class="buy-icon">'+btn.icon+'</span>';
               botoesHTML += '<span class="hero-card__buy-inner">';
