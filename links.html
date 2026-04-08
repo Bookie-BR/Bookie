@@ -302,136 +302,231 @@
     }
     @keyframes borderPulse { 0%,100%{ opacity:1; } 50%{ opacity:0.6; } }
 
-    /* ── HERO BUY BUTTONS ── */
+    /* ══════════════════════════════════════════════════════
+       HERO BUY BUTTONS — Glassmorphism Edition
+    ══════════════════════════════════════════════════════ */
     .hero-card__btns {
       display: flex; gap: 0.5rem; flex-wrap: wrap; width: 100%;
     }
-    .hero-card__buy {
-      flex: 1 1 auto; min-width: 0;
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
-      padding: 0.6rem 0.85rem; border-radius: var(--pill);
-      font-family: var(--dm); font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.01em; cursor: pointer; white-space: nowrap;
-      text-decoration: none; border: none;
-      transition: transform 0.22s cubic-bezier(0.23,1,0.32,1),
-                  box-shadow 0.22s ease, opacity 0.2s ease;
-      position: relative; z-index: 2;
-    }
-    .hero-card__buy:not([disabled]):hover { transform: translateY(-2px); }
-    .hero-card__buy:not([disabled]):active { transform: scale(0.97); }
 
-    /* ── PRIMARY: Eduzz — destaque total, linha própria ── */
-    .hero-card__buy--primary {
-      flex: 0 0 100%;
-      padding: 0.82rem 1.25rem;
-      background: linear-gradient(130deg, #6080f8 0%, #4169E1 55%, #1e3ab8 100%);
-      color: #fff;
-      font-size: 0.88rem;
-      box-shadow: 0 4px 22px rgba(65,105,225,0.55), 0 0 0 1px rgba(120,160,255,0.25) inset;
-      animation: eduzzGlow 2.8s ease-in-out infinite;
-      overflow: visible;
-    }
-    .hero-card__buy--primary::after {
-      content: '★ Melhor oferta';
-      position: absolute; top: -9px; right: 12px;
-      background: linear-gradient(90deg, #f0c040, #e6a800);
-      color: #0a0a0a; font-family: var(--syne);
-      font-size: 0.52rem; font-weight: 800;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.18rem 0.55rem; border-radius: var(--pill);
-      box-shadow: 0 2px 8px rgba(212,175,55,0.45);
-      white-space: nowrap; pointer-events: none;
-    }
-    .hero-card__buy--primary:hover {
-      box-shadow: 0 8px 36px rgba(65,105,225,0.75), 0 0 0 1px rgba(120,160,255,0.3) inset;
-    }
-    @keyframes eduzzGlow {
-      0%,100% { box-shadow: 0 4px 22px rgba(65,105,225,0.55), 0 0 0 1px rgba(120,160,255,0.25) inset; }
-      50%      { box-shadow: 0 6px 38px rgba(65,105,225,0.80), 0 0 0 1px rgba(120,160,255,0.35) inset; }
-    }
-
-    /* ── KIWIFY — verde ── */
-    .hero-card__buy--kiwify {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      color: #fff;
-      box-shadow: 0 3px 14px rgba(34,197,94,0.30);
-    }
-    .hero-card__buy--kiwify:hover {
-      box-shadow: 0 6px 24px rgba(34,197,94,0.50);
-    }
-
-    /* ── HOTMART — laranja ── */
-    .hero-card__buy--hotmart {
-      background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
-      color: #fff;
-      box-shadow: 0 3px 14px rgba(249,115,22,0.30);
-    }
-    .hero-card__buy--hotmart:hover {
-      box-shadow: 0 6px 24px rgba(249,115,22,0.50);
-    }
-
-    /* ── AMAZON / KINDLE — âmbar ── */
-    .hero-card__buy--amazon {
-      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-      color: #0a0a0a;
-      box-shadow: 0 3px 14px rgba(245,158,11,0.30);
-    }
-    .hero-card__buy--amazon:hover {
-      box-shadow: 0 6px 24px rgba(245,158,11,0.50);
-    }
-
-    /* ── SECONDARY (fallback) ── */
-    .hero-card__buy--secondary {
-      background: rgba(255,255,255,0.07);
-      color: var(--g100);
-      border: 1px solid rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-    }
-    .hero-card__buy--secondary:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.28);
-    }
-
-    /* ── MUTED ── */
-    .hero-card__buy--muted {
-      background: rgba(255,255,255,0.04);
-      color: var(--g500);
-      border: 1px solid rgba(255,255,255,0.07);
-      cursor: not-allowed;
-    }
-
-    .hero-card__buy .buy-icon { font-size: 0.9em; line-height: 1; }
-    .hero-card__buy-inner {
-      display: flex; flex-direction: column; align-items: center; line-height: 1.2;
-    }
-    .hero-card__buy-via {
-      font-size: 0.6rem; font-weight: 400; opacity: 0.75; letter-spacing: 0.04em;
-    }
-    .hero-card__buy--primary .hero-card__buy-via { opacity: 0.85; }
-    .hero-card__buy-name {
-      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em;
-    }
-    .hero-card__buy--primary .hero-card__buy-name { font-size: 0.92rem; }
+    /* Label row: texto + badge "Recomendado" inline */
     .hero-card__btns-label {
       width: 100%;
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #878a9c;
-      margin-bottom: 0.15rem;
+      display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #6a6f88; margin-bottom: 0.1rem;
+    }
+    .hero-card__btns-label::after {
+      content: '⚡ Eduzz · Recomendado';
+      display: inline-flex; align-items: center;
+      background: linear-gradient(90deg, rgba(212,175,55,0.92), rgba(230,168,0,0.98));
+      color: #0a0a0a; font-family: var(--syne);
+      font-size: 0.46rem; font-weight: 800;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      padding: 0.15rem 0.48rem; border-radius: var(--pill);
+      box-shadow: 0 1px 8px rgba(212,175,55,0.40);
+      white-space: nowrap; flex-shrink: 0;
     }
 
-    /* Footer em coluna quando há múltiplos botões de compra */
-    .hero-card__footer--multi {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
+    /* ── Base comum ── */
+    .hero-card__buy {
+      flex: 1 1 auto; min-width: 0;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.48rem;
+      padding: 0.65rem 1rem; border-radius: var(--pill);
+      font-family: var(--dm); font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.01em; cursor: pointer; white-space: nowrap;
+      text-decoration: none; border: 1px solid transparent;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      transition:
+        transform 0.30s cubic-bezier(0.23,1,0.32,1),
+        box-shadow 0.30s ease,
+        background 0.30s ease,
+        border-color 0.30s ease,
+        color 0.25s ease;
+      position: relative; z-index: 2; overflow: hidden;
+    }
+    .hero-card__buy:not([disabled]):hover  { transform: translateY(-3px) scale(1.025); }
+    .hero-card__buy:not([disabled]):active { transform: scale(0.965); transition-duration: 0.08s; }
+
+    /* Shimmer sweep no hover — plataformas secundárias */
+    .hero-card__buy:not([disabled]):not(.hero-card__buy--primary)::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg,
+        transparent 20%,
+        rgba(255,255,255,0.20) 50%,
+        transparent 80%);
+      transform: translateX(-130%) skewX(-12deg);
+      transition: transform 0.58s cubic-bezier(0.23,1,0.32,1);
+      pointer-events: none;
+    }
+    .hero-card__buy:not([disabled]):not(.hero-card__buy--primary):hover::before {
+      transform: translateX(240%) skewX(-12deg);
     }
 
-    /* Mobile: secondary buttons share row 50/50 */
-    @media (max-width: 520px) {
-      .hero-card__buy:not(.hero-card__buy--primary) {
-        flex: 1 1 calc(50% - 0.25rem);
+    /* ══ PRIMARY — Eduzz: glassmorphism azul exclusivo ══ */
+    .hero-card__buy--primary {
+      flex: 0 0 100%;
+      padding: 1rem 1.5rem;
+      font-size: 0.93rem;
+      background: linear-gradient(135deg,
+        rgba(96,128,248,0.52) 0%,
+        rgba(65,105,225,0.68) 50%,
+        rgba(30,58,184,0.62) 100%);
+      border-color: rgba(140,175,255,0.42);
+      color: #fff;
+      box-shadow:
+        0 0 0 1px rgba(140,175,255,0.18) inset,
+        0 1px 0 rgba(255,255,255,0.24) inset,
+        0 -1px 0 rgba(0,0,0,0.18) inset,
+        0 6px 32px rgba(65,105,225,0.52);
+      animation: eduzzGlow 4s ease-in-out infinite;
+    }
+    /* Shimmer contínuo automático */
+    .hero-card__buy--primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(108deg,
+        transparent 10%,
+        rgba(255,255,255,0.00) 30%,
+        rgba(255,255,255,0.26) 50%,
+        rgba(255,255,255,0.00) 70%,
+        transparent 90%);
+      animation: eduzzSweep 5.5s 1.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes eduzzSweep {
+      0%,60%,100% { transform: translateX(-140%) skewX(-12deg); }
+      35%          { transform: translateX(230%) skewX(-12deg); }
+    }
+    @keyframes eduzzGlow {
+      0%,100% {
+        box-shadow:
+          0 0 0 1px rgba(140,175,255,0.18) inset,
+          0 1px 0 rgba(255,255,255,0.24) inset,
+          0 -1px 0 rgba(0,0,0,0.18) inset,
+          0 6px 32px rgba(65,105,225,0.52);
       }
+      50% {
+        box-shadow:
+          0 0 0 1px rgba(160,200,255,0.28) inset,
+          0 1px 0 rgba(255,255,255,0.30) inset,
+          0 -1px 0 rgba(0,0,0,0.15) inset,
+          0 10px 52px rgba(65,105,225,0.88);
+      }
+    }
+    .hero-card__buy--primary:hover {
+      border-color: rgba(170,210,255,0.62);
+      box-shadow:
+        0 0 0 1px rgba(170,210,255,0.28) inset,
+        0 1px 0 rgba(255,255,255,0.32) inset,
+        0 -1px 0 rgba(0,0,0,0.12) inset,
+        0 12px 56px rgba(65,105,225,0.92);
+      animation-play-state: paused;
+    }
+
+    /* ══ KIWIFY — glass esmeralda ══ */
+    .hero-card__buy--kiwify {
+      background: linear-gradient(135deg,
+        rgba(34,197,94,0.16) 0%, rgba(22,163,74,0.22) 100%);
+      border-color: rgba(34,197,94,0.32);
+      color: #86efac;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.07) inset, 0 3px 16px rgba(34,197,94,0.14);
+    }
+    .hero-card__buy--kiwify:hover {
+      background: linear-gradient(135deg,
+        rgba(34,197,94,0.30) 0%, rgba(22,163,74,0.40) 100%);
+      border-color: rgba(74,222,128,0.55);
+      color: #bbf7d0;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.13) inset, 0 8px 30px rgba(34,197,94,0.40);
+    }
+
+    /* ══ HOTMART — glass chama ══ */
+    .hero-card__buy--hotmart {
+      background: linear-gradient(135deg,
+        rgba(249,115,22,0.16) 0%, rgba(234,88,12,0.22) 100%);
+      border-color: rgba(249,115,22,0.32);
+      color: #fdba74;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.07) inset, 0 3px 16px rgba(249,115,22,0.14);
+    }
+    .hero-card__buy--hotmart:hover {
+      background: linear-gradient(135deg,
+        rgba(249,115,22,0.30) 0%, rgba(234,88,12,0.40) 100%);
+      border-color: rgba(251,146,60,0.55);
+      color: #fed7aa;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.13) inset, 0 8px 30px rgba(249,115,22,0.40);
+    }
+
+    /* ══ AMAZON/KINDLE — glass âmbar ══ */
+    .hero-card__buy--amazon {
+      background: linear-gradient(135deg,
+        rgba(245,158,11,0.14) 0%, rgba(217,119,6,0.20) 100%);
+      border-color: rgba(245,158,11,0.30);
+      color: #fcd34d;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.07) inset, 0 3px 16px rgba(245,158,11,0.12);
+    }
+    .hero-card__buy--amazon:hover {
+      background: linear-gradient(135deg,
+        rgba(245,158,11,0.28) 0%, rgba(217,119,6,0.36) 100%);
+      border-color: rgba(251,191,36,0.52);
+      color: #fef08a;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.13) inset, 0 8px 30px rgba(245,158,11,0.38);
+    }
+
+    /* ── Secondary (fallback) ── */
+    .hero-card__buy--secondary {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12); color: var(--g100);
+    }
+    .hero-card__buy--secondary:hover {
+      background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.24);
+    }
+
+    /* ── Muted ── */
+    .hero-card__buy--muted {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.06);
+      color: var(--g500); cursor: not-allowed;
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+
+    /* Ícone: glow dinâmico por plataforma */
+    .hero-card__buy .buy-icon {
+      font-size: 1rem; line-height: 1;
+      transition: filter 0.28s ease, transform 0.28s cubic-bezier(0.23,1,0.32,1);
+    }
+    .hero-card__buy:hover .buy-icon { transform: scale(1.18) rotate(-4deg); }
+    .hero-card__buy--primary  .buy-icon { font-size: 1.12rem; filter: drop-shadow(0 0 8px rgba(140,175,255,0.85)); }
+    .hero-card__buy--kiwify   .buy-icon { filter: drop-shadow(0 0 5px rgba(34,197,94,0.60)); }
+    .hero-card__buy--kiwify:hover   .buy-icon { filter: drop-shadow(0 0 10px rgba(74,222,128,0.90)); }
+    .hero-card__buy--hotmart  .buy-icon { filter: drop-shadow(0 0 5px rgba(249,115,22,0.60)); }
+    .hero-card__buy--hotmart:hover  .buy-icon { filter: drop-shadow(0 0 10px rgba(251,146,60,0.90)); }
+    .hero-card__buy--amazon   .buy-icon { filter: drop-shadow(0 0 5px rgba(245,158,11,0.60)); }
+    .hero-card__buy--amazon:hover   .buy-icon { filter: drop-shadow(0 0 10px rgba(251,191,36,0.90)); }
+
+    /* Inner text */
+    .hero-card__buy-inner {
+      display: flex; flex-direction: column; align-items: center; line-height: 1.2; gap: 0.04rem;
+    }
+    .hero-card__buy-via {
+      font-size: 0.57rem; font-weight: 500; opacity: 0.68;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .hero-card__buy--primary .hero-card__buy-via { opacity: 0.80; font-size: 0.60rem; letter-spacing: 0.10em; }
+    .hero-card__buy-name { font-size: 0.80rem; font-weight: 700; letter-spacing: 0.01em; }
+    .hero-card__buy--primary .hero-card__buy-name { font-size: 1.00rem; letter-spacing: -0.01em; }
+
+    /* Footer multi */
+    .hero-card__footer--multi {
+      flex-direction: column; align-items: flex-start; gap: 0.8rem;
+    }
+
+    /* Mobile ≤520px */
+    @media (max-width: 520px) {
+      .hero-card__buy:not(.hero-card__buy--primary) { flex: 1 1 calc(50% - 0.25rem); }
+      .hero-card__buy--primary { padding: 0.88rem 1.2rem; font-size: 0.88rem; }
     }
     .hero-card::before {
       content: ''; position: absolute;
