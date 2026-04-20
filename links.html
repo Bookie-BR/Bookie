@@ -318,7 +318,7 @@
       color: #6a6f88; margin-bottom: 0.1rem;
     }
     .hero-card__btns-label::after {
-      content: '⚡ Eduzz · Recomendado';
+      content: '';
       display: inline-flex; align-items: center;
       background: linear-gradient(90deg, rgba(212,175,55,0.92), rgba(230,168,0,0.98));
       color: #0a0a0a; font-family: var(--syne);
@@ -862,33 +862,11 @@
         badgeHero:     "36% OFF",
         botoes: [
           {
-            label:   "Eduzz",
-            icon:    "🛒",
-            url:     "https://chk.eduzz.com/39VK4ANYWR",
+            label:   "Ver Mais",
+            icon:    "👀",
+            url:     "MarketingDig.html",
             estilo:  "primary",
             novaAba: true
-          },
-          {
-            label:   "Kiwify",
-            icon:    "🌿",
-            url:     "https://pay.kiwify.com.br/dXc1NQU",
-            estilo:  "kiwify",
-            novaAba: true
-          },
-          {
-            label:   "Hotmart",
-            icon:    "🔥",
-            url:     "https://pay.hotmart.com/X105190044L",
-            estilo:  "hotmart",
-            novaAba: true
-          },
-          {
-            label:   "Amazon",
-            icon:    "📖",
-            url:     "https://a.co/d/08sKMrQr",
-            estilo:  "amazon",
-            novaAba: true,
-            titulo:  "Amazon Kindle"
           }
         ],
         novaAba:       true
@@ -1027,7 +1005,7 @@
           // Build buttons HTML
           var botoesHTML = '';
           if (hasBotoes) {
-            botoesHTML = '<div class="hero-card__btns"><span class="hero-card__btns-label">Adquira agora em</span>';
+            botoesHTML = '<div class="hero-card__btns"><span class=""></span>';
             item.botoes.forEach(function(btn) {
               var cls = 'hero-card__buy hero-card__buy--' + (btn.estilo || 'secondary');
               var tag = (btn.estilo === 'muted' || btn.url === '#') ? 'button' : 'a';
@@ -1038,7 +1016,7 @@
                 attrs = ' type="button" disabled';
               }
               var tipAttr = btn.titulo ? ' title="'+btn.titulo+'"' : '';
-              var viaText = (btn.estilo === 'muted') ? 'Em breve' : (btn.estilo === 'primary') ? 'comprar via' : 'via';
+              var viaText = (btn.estilo === 'muted') ? 'Em breve' : (btn.estilo === 'primary') ? 'Pagina Principal' : 'Sobre';
               botoesHTML += '<'+tag+' class="'+cls+'"'+attrs+tipAttr+'>';
               botoesHTML += '<span class="buy-icon">'+btn.icon+'</span>';
               botoesHTML += '<span class="hero-card__buy-inner">';
